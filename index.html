@@ -58,20 +58,23 @@
         window.onload = function() {
             // Получаем параметры из URL
             const urlParams = new URLSearchParams(window.location.search);
-            const subject = urlParams.get('subject'); // Получаем тему письма
-            const body = urlParams.get('body'); // Получаем тело письма
+            const subject = urlParams.get('subject'); // Тема письма
+            const body = urlParams.get('body'); // Тело письма
             const lang = urlParams.get('lang'); // Язык, по умолчанию русский
+            
+            // Заменяем пробелы на "+" до кодирования
+            const modifiedSubject = subject.replace(/ /g, '+');
+            const modifiedBody = body.replace(/ /g, '+');
         
             // Кодируем параметры
-            const encodedSubject = encodeURIComponent(subject);
-            const encodedBody = encodeURIComponent(body);
+            const encodedSubject = encodeURIComponent(modifiedSubject);
+            const encodedBody = encodeURIComponent(modifiedBody);
         
             // Формируем ссылку mailto с параметрами
             let mailtoLink = `mailto:visixn.cryptx@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
         
-            // Проверяем, если это мобильное устройство (Android, iPhone и другие)
+            // Для мобильных устройств добавляем + вместо %20
             if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-                // Заменяем %20 на + на мобильных устройствах
                 mailtoLink = mailtoLink.replace(/%20/g, '+');
                 console.log("После замены %20 на +:", mailtoLink);  // Логируем результат
             } else {
