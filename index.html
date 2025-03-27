@@ -59,6 +59,14 @@
             // Кодируем параметры, заменяя пробелы на "+"
             const encodedSubject = encodeURIComponent(subject);
             const encodedBody = encodeURIComponent(body);
+
+            // Формируем ссылку mailto с параметрами
+            let mailtoLink = `mailto:visixn.cryptx@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
+
+            // Проверяем, если это мобильное устройство (Android, iPhone и другие)
+            if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                mailtoLink = mailtoLink.replace(/%20/g, '+');
+            }
         
             // Задаем текст в зависимости от языка
             const messages = {
@@ -78,9 +86,6 @@
             // Устанавливаем текст на страницу
             document.getElementById('title').textContent = selectedLanguage.title;
             document.getElementById('message').innerHTML = selectedLanguage.message;
-    
-            // Формируем ссылку mailto с параметрами
-            const mailtoLink = `mailto:visixn.cryptx@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
     
             // Редиректим на mailto
             window.location.href = mailtoLink;
