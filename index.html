@@ -57,8 +57,8 @@
             const lang = urlParams.get('lang'); // Язык, по умолчанию русский
         
             // Кодируем параметры, заменяя пробелы на "+"
-            const encodedSubject = encodeURIComponent(subject).replace(/%20/g, '+');
-            const encodedBody = encodeURIComponent(body).replace(/%20/g, '+');
+            const encodedSubject = encodeURIComponent(subject);
+            const encodedBody = encodeURIComponent(body);
         
             // Задаем текст в зависимости от языка
             const messages = {
