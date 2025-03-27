@@ -55,52 +55,51 @@
         }
     </style>
     <script>
-        // Дожидаемся полной загрузки документа
-        document.addEventListener("DOMContentLoaded", function() {
+        window.onload = function() {
+            // Получаем параметры из URL
             const urlParams = new URLSearchParams(window.location.search);
-            const subject = urlParams.get('subject');
-            const body = urlParams.get('body');
-            const lang = urlParams.get('lang');
+            const subject = urlParams.get('subject'); // Получаем тему письма
+            const body = urlParams.get('body'); // Получаем тело письма
+            const lang = urlParams.get('lang'); // Язык, по умолчанию русский
         
+            // Кодируем параметры
             const encodedSubject = encodeURIComponent(subject);
             const encodedBody = encodeURIComponent(body);
-
+        
+            // Формируем ссылку mailto с параметрами
             let mailtoLink = `mailto:visixn.cryptx@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
-
-            // Проверка на мобильное устройство
-            const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-            // Выводим сообщение о том, что устройство мобильное или нет
-            if (isMobile) {
-                document.getElementById('deviceMessage').textContent = 'Это мобильное устройство';
-            } else {
-                document.getElementById('deviceMessage').textContent = 'Это не мобильное устройство';
-            }
-
-            if (isMobile) {
-                // Заменяем %20 на + для мобильных устройств
+        
+            // Проверяем, если это мобильное устройство (Android, iPhone и другие)
+            if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                // Заменяем %20 на + на мобильных устройствах
                 mailtoLink = mailtoLink.replace(/%20/g, '+');
+                console.log("На мобильном устройстве: заменили %20 на +");
+            } else {
+                console.log("Не мобильное устройство: оставляем %20");
             }
         
+            // Задаем текст в зависимости от языка
             const messages = {
                 ru: {
                     title: 'Открыть почтовый клиент',
-                    message: `Если письмо не открылось автоматически, <a href="mailto:visixn.cryptx@gmail.com?subject=${encodedSubject}&body=${encodedBody}">нажмите сюда</a>.`
+                    message: `Если письмо не открылось автоматически, <a href="${mailtoLink}">нажмите сюда</a>.`
                 },
                 en: {
                     title: 'Open Email Client',
-                    message: `If the email didn\'t open automatically, <a href="mailto:visixn.cryptx@gmail.com?subject=${encodedSubject}&body=${encodedBody}">click here</a>.`
+                    message: `If the email didn\'t open automatically, <a href="${mailtoLink}">click here</a>.`
                 }
             };
-
+        
+            // Выбираем текст в зависимости от языка
             const selectedLanguage = messages[lang];
-
+        
+            // Устанавливаем текст на страницу
             document.getElementById('title').textContent = selectedLanguage.title;
             document.getElementById('message').innerHTML = selectedLanguage.message;
-
-            // Редирект на почтовый клиент
+        
+            // Редиректим на mailto
             window.location.href = mailtoLink;
-        });
+        };
     </script>
 </head>
 <body>
