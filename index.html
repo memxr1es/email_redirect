@@ -1,0 +1,25 @@
+i<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редирект на почту</title>
+    <script>
+        window.onload = function() {
+            // Получаем параметры из URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const subject = urlParams.get('subject'); // Если нет, ставим по умолчанию
+            const body = urlParams.get('body'); // По умолчанию
+
+            // Формируем ссылку mailto
+            const mailtoLink = `mailto:visixn.cryptx@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+            // Редиректим на mailto
+            window.location.href = mailtoLink;
+        }
+    </script>
+</head>
+<body>
+    <p>Если письмо не открылось автоматически, <a href="mailto:support@example.com?subject=Запрос%20в%20поддержку&body=Здравствуйте,%20мне%20нужна%20помощь.">нажмите сюда</a>.</p>
+</body>
+</html>
