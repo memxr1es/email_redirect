@@ -1,18 +1,68 @@
-i<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Редирект на почту</title>
+    <style>
+        @font-face {
+            font-family: 'PhonkSans_Regular';
+            src: url('PhonkSans_Regular.ttf') format('truetype'); /* Указываем путь к файлу шрифта */
+        }
+        
+        body {
+            background-color: #181818; /* Темный фон */
+            color: white; /* Белый текст */
+            font-family: 'PhonkSans_Regular', sans-serif;
+            text-align: center;
+            padding: 20px;
+            font-weight: bold;
+        }
+
+        a {
+            color: #1e90ff; /* Ссылка синего цвета */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .message {
+            font-size: 18px;
+        }
+
+        .title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+    </style>
     <script>
         window.onload = function() {
             // Получаем параметры из URL
             const urlParams = new URLSearchParams(window.location.search);
             const subject = urlParams.get('subject'); // Если нет, ставим по умолчанию
             const body = urlParams.get('body'); // По умолчанию
+            const lang = urlParams.get('lang'); // Язык, по умолчанию русский
 
-            // Формируем ссылку mailto
-            const mailtoLink = `mailto:visixn.cryptx@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            // Задаем текст в зависимости от языка
+            const messages = {
+                ru: {
+                    title: 'Открыть почтовый клиент',
+                    message: 'Если письмо не открылось автоматически, <a href="mailto:support@example.com?subject=Запрос%20в%20поддержку&body=Здравствуйте,%20мне%20нужна%20помощь.">нажмите сюда</a>.'
+                },
+                en: {
+                    title: 'Open Email Client',
+                    message: 'If the email didn\'t open automatically, <a href="mailto:support@example.com?subject=Request%20for%20support&body=Hello,%20I%20need%20help.">click here</a>.'
+                }
+            };
+
+            // Выбираем текст в зависимости от языка
+            const selectedLanguage = messages[lang];
+
+            // Устанавливаем текст на страницу
+            document.getElementById('title').textContent = selectedLanguage.title;
+            document.getElementById('message').innerHTML = selectedLanguage.message;
+
+            // Формируем ссылку mailto с параметрами
+            const mailtoLink = `mailto:support@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
             // Редиректим на mailto
             window.location.href = mailtoLink;
@@ -20,6 +70,7 @@ i<!DOCTYPE html>
     </script>
 </head>
 <body>
-    <p>Если письмо не открылось автоматически, <a href="mailto:visixn.cryptx@gmail.com?subject=Заявка%20в%20поддержку&body=Здравствуйте">нажмите сюда</a>.</p>
+    <div class="title" id="title"></div>
+    <div class="message" id="message"></div>
 </body>
 </html>
