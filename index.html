@@ -61,21 +61,21 @@
             const subject = urlParams.get('subject'); // Тема письма
             const body = urlParams.get('body'); // Тело письма
             const lang = urlParams.get('lang'); // Язык, по умолчанию русский
-            
-            // Заменяем пробелы на "+" в параметрах
-            const modifiedSubject = subject.replace(/ /g, '+');
-            const modifiedBody = body.replace(/ /g, '+');
         
-            // Кодируем остальные символы
-            const encodedSubject = encodeURIComponent(modifiedSubject);
-            const encodedBody = encodeURIComponent(modifiedBody);
+            // Кодируем параметры
+            const encodedSubject = encodeURIComponent(subject);
+            const encodedBody = encodeURIComponent(body);
         
             // Формируем ссылку mailto с параметрами
             let mailtoLink = `mailto:visixn.cryptx@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
         
             // Проверяем, если это мобильное устройство (Android, iPhone и другие)
             if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-                console.log("Это мобильное устройство");
+                // Для мобильных устройств заменяем %20 на "+"
+                mailtoLink = mailtoLink.replace(/%20/g, '+');
+                console.log("После замены %20 на +:", mailtoLink);  // Логируем результат
+            } else {
+                console.log("Не мобильное устройство: оставляем %20");
             }
         
             // Задаем текст в зависимости от языка
