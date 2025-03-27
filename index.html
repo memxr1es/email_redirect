@@ -65,7 +65,7 @@
 
             // Проверяем, если это мобильное устройство (Android, iPhone и другие)
             if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-                mailtoLink = mailtoLink.replace(/%20/g, '+');
+                mailtoLink = mailtoLink.replace(/%20, '+');
             }
         
             // Задаем текст в зависимости от языка
