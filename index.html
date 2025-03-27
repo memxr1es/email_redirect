@@ -52,8 +52,8 @@
         window.onload = function() {
             // Получаем параметры из URL
             const urlParams = new URLSearchParams(window.location.search);
-            const subject = urlParams.get('subject'); // Если нет, ставим по умолчанию
-            const body = urlParams.get('body'); // По умолчанию
+            const subject = encodeURIComponent(urlParams.get('subject')); // Если нет, ставим по умолчанию
+            const body = encodeURIComponent(urlParams.get('body')); // По умолчанию
             const lang = urlParams.get('lang'); // Язык, по умолчанию русский
 
             // Задаем текст в зависимости от языка
