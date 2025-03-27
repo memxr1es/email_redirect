@@ -62,10 +62,18 @@
 
             // Формируем ссылку mailto с параметрами
             let mailtoLink = `mailto:visixn.cryptx@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
+            const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-            // Проверяем, если это мобильное устройство (Android, iPhone и другие)
-            if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-                mailtoLink = mailtoLink.replace(/%20, '+');
+            // Выводим сообщение о том, что устройство мобильное или нет
+            if (isMobile) {
+                document.getElementById('deviceMessage').textContent = 'Это мобильное устройство';
+            } else {
+                document.getElementById('deviceMessage').textContent = 'Это не мобильное устройство';
+            }
+
+            if (isMobile) {
+                // Заменяем %20 на + для мобильных устройств
+                mailtoLink = mailtoLink.replace(/%20/g, '+');
             }
         
             // Задаем текст в зависимости от языка
