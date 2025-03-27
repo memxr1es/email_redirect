@@ -16,26 +16,36 @@
             color: white; /* Белый текст */
             font-family: 'PhonkSans_Regular', sans-serif;
             text-align: center;
-            padding: 20px;
             font-weight: bold;
+            height: 100vh; /* Высота на весь экран */
+            display: flex;
+            justify-content: center; /* Центрирование по горизонтали */
+            align-items: center; /* Центрирование по вертикали */
+            margin: 0;
         }
 
         a {
             color: #1e90ff; /* Ссылка синего цвета */
             text-decoration: none;
             font-weight: bold;
-            text-shadow: 0 0 3px #1e90ff;
+            text-shadow: 0 0 2px #1e90ff;
         }
 
         .message {
             font-size: 18px;
-            text-shadow: 0 0 2px rgba(255, 255, 255, 0.8);
+            text-shadow: 0 0 1px rgba(255, 255, 255, 0.8);
         }
 
         .title {
             font-size: 24px;
             margin-bottom: 20px;
-            text-shadow: 0 0 3px rgba(255, 255, 255, 1);
+            text-shadow: 0 0 2px rgba(255, 255, 255, 1);
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column; /* Располагаем элементы вертикально */
+            align-items: center; /* Центрируем контент */
         }
     </style>
     <script>
@@ -74,7 +84,9 @@
     </script>
 </head>
 <body>
-    <div class="title" id="title"></div>
-    <div class="message" id="message"></div>
+    <div class="container">
+        <div class="title" id="title"></div>
+        <div class="message" id="message"></div>
+    </div>
 </body>
 </html>
