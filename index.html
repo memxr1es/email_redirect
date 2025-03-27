@@ -70,18 +70,21 @@
                     title: 'Open Email Client',
                     message: `If the email didn\'t open automatically, <a href="mailto:visixn.cryptx@gmail.com?subject=${encodedSubject}&body=${encodedBody}">click here</a>.`
                 }
-        };
+            };
+
+            // Выбираем текст в зависимости от языка
+            const selectedLanguage = messages[lang];
     
-        // Выбираем текст в зависимости от языка
-        const selectedLanguage = messages[lang];
+            // Устанавливаем текст на страницу
+            document.getElementById('title').textContent = selectedLanguage.title;
+            document.getElementById('message').innerHTML = selectedLanguage.message;
     
-        // Устанавливаем текст на страницу
-        document.getElementById('title').textContent = selectedLanguage.title;
-        document.getElementById('message').innerHTML = selectedLanguage.message;
+            // Формируем ссылку mailto с параметрами
+            const mailtoLink = `mailto:visixn.cryptx@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
     
-        // Формируем ссылку mailto с параметрами
-        const mailtoLink = `mailto:visixn.cryptx@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
-    
+            // Редиректим на mailto
+            window.location.href = mailtoLink;
+        }
     </script>
 </head>
 <body>
