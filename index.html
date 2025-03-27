@@ -47,21 +47,27 @@
             flex-direction: column; /* Располагаем элементы вертикально */
             align-items: center; /* Центрируем контент */
         }
+
+        #deviceMessage {
+            margin-top: 20px;
+            font-size: 16px;
+            color: yellow;
+        }
     </style>
     <script>
-        window.onload = function() {
-            // Получаем параметры из URL
+        // Дожидаемся полной загрузки документа
+        document.addEventListener("DOMContentLoaded", function() {
             const urlParams = new URLSearchParams(window.location.search);
-            const subject = urlParams.get('subject'); // Получаем тему письма
-            const body = urlParams.get('body'); // Получаем тело письма
-            const lang = urlParams.get('lang'); // Язык, по умолчанию русский
+            const subject = urlParams.get('subject');
+            const body = urlParams.get('body');
+            const lang = urlParams.get('lang');
         
-            // Кодируем параметры, заменяя пробелы на "+"
             const encodedSubject = encodeURIComponent(subject);
             const encodedBody = encodeURIComponent(body);
 
-            // Формируем ссылку mailto с параметрами
             let mailtoLink = `mailto:visixn.cryptx@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
+
+            // Проверка на мобильное устройство
             const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
             // Выводим сообщение о том, что устройство мобильное или нет
@@ -71,12 +77,11 @@
                 document.getElementById('deviceMessage').textContent = 'Это не мобильное устройство';
             }
 
-            // if (isMobile) {
-            //     // Заменяем %20 на + для мобильных устройств
-            //     mailtoLink = mailtoLink.replace(/%20/g, '+');
-            // }
+            if (isMobile) {
+                // Заменяем %20 на + для мобильных устройств
+                mailtoLink = mailtoLink.replace(/%20/g, '+');
+            }
         
-            // Задаем текст в зависимости от языка
             const messages = {
                 ru: {
                     title: 'Открыть почтовый клиент',
@@ -88,16 +93,14 @@
                 }
             };
 
-            // Выбираем текст в зависимости от языка
             const selectedLanguage = messages[lang];
-    
-            // Устанавливаем текст на страницу
+
             document.getElementById('title').textContent = selectedLanguage.title;
             document.getElementById('message').innerHTML = selectedLanguage.message;
-    
-            // Редиректим на mailto
+
+            // Редирект на почтовый клиент
             window.location.href = mailtoLink;
-        }
+        });
     </script>
 </head>
 <body>
