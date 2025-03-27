@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Редирект на почту</title>
+    <title>VISIXN BOT</title>
     <style>
         @font-face {
             font-family: 'PhonkSans_Regular';
@@ -27,10 +27,18 @@
 
         .message {
             font-size: 18px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
         }
 
         .title {
             font-size: 24px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 1);
+        }
+
+        .logo {
+            width: 120px; /* Размер логотипа */
+            height: auto;
             margin-bottom: 20px;
         }
     </style>
@@ -70,6 +78,7 @@
     </script>
 </head>
 <body>
+    <img src="logo.png" alt="VISIXN Logo" class="logo">
     <div class="title" id="title"></div>
     <div class="message" id="message"></div>
 </body>
