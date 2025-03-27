@@ -72,7 +72,7 @@
             // Проверяем, если это мобильное устройство (Android, iPhone и другие)
             if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
                 // Для мобильных устройств заменяем %20 на "+"
-                mailtoLink = mailtoLink.replace(/%20/g, '+');
+                mailtoLink = mailtoLink.replace(/%2520/g, '+');
                 console.log("После замены %20 на +:", mailtoLink);  // Логируем результат
             } else {
                 console.log("Не мобильное устройство: оставляем %20");
